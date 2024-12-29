@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail API Email Sender</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Send Emails Using Gmail API</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="sender_name" class="form-label">Sender's Name</label>
+                <input type="text" class="form-control" id="sender_name" name="sender_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="sender_email" class="form-label">Sender's Email</label>
+                <input type="email" class="form-control" id="sender_email" name="sender_email" required>
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+            </div>
+            <div class="mb-3">
+                <label for="message_body" class="form-label">Message Body</label>
+                <textarea class="form-control" id="message_body" name="message_body" rows="4" required>
+Hi {name},
+
+Your custom message here.
+                </textarea>
+            </div>
+            <div class="mb-3">
+                <label for="file" class="form-label">Excel File</label>
+                <input type="file" class="form-control" id="file" name="file" accept=".xlsx" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Emails</button>
+        </form>
+    </div>
+</body>
+</html>
